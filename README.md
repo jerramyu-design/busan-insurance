@@ -11,6 +11,7 @@ Supabase 專案 busan-insurance（東京，rntcattexcpsjtmmdlzy）已建立，�
 - 未滿15歲只可選 Y1；生日剛滿15歲可選 U3／Z10／Z9，前後端皆驗證。
 - 保留所有原始保費、保障文字及圖片；SHA-256 原圖比對測試防止誤改。
 - 原版畫面、不便險完整原圖與各方案放大查看；手機表格可左右捲動。
+- 登入頁與主頁加入韓國國旗、海浪與海鷗圖案，以及廣安大橋、甘川文化村、海東龍宮寺照片；電腦與手機排版皆已檢查。素材來源與授權見 [credits.html](assets/travel/credits.html)。
 - 後端公司密碼驗證，1小時有效且可撤銷的登入憑證；前端只存在記憶體。
 - 統計表獨立密碼；關閉、背景切換及5分鐘後清除統計畫面。登出清除旅客欄位。
 - AES-256-GCM 加密姓名、身分證、生日及方案；HMAC-SHA-256 身分證索引與原子 upsert。
@@ -47,7 +48,7 @@ GitHub Pages 從 gh-pages 分支發布；main 的原始碼更新不會自動更�
 ## 檔案
 
 - index.html／app.js：保留原頁面的前端。
-- assets/：11張原始保險圖片。
+- assets/：11張原始保險圖片；新增旅遊素材及署名頁獨立放在 assets/travel/。
 - supabase/schema.sql：資料表、權限及原子函式。
 - supabase/functions/insurance-api/：Edge Function；無外部執行期套件。
 - tests/：固定資料、加密、API及實際PostgreSQL整合測試。
