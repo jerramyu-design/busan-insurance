@@ -2,6 +2,10 @@
 
 沿用提供的 Codex-ready 網站與 11 張保險原圖，補齊共用資料庫、安全驗證與部署檔案。固定旅程日：2026-10-18。
 
+網站：https://jerramyu-design.github.io/busan-insurance/
+
+Supabase 專案 busan-insurance（東京，rntcattexcpsjtmmdlzy）已建立，資料表與 Edge Function 已部署。網站已發布；目前仍待管理者儲存 Secrets，才能開放登入與登記。完整狀態見 [VERIFICATION.md](VERIFICATION.md)。
+
 ## 已完成
 
 - 未滿15歲只可選 Y1；生日剛滿15歲可選 U3／Z10／Z9，前後端皆驗證。
@@ -23,7 +27,7 @@
     npm test
     npm run preview
 
-一般預覽尚未接上 Supabase 時，登入會明確提示設定未完成。
+一般預覽使用 config.js 的正式 API。後端只允許正式網站 origin；本機測試請使用以下獨立測試預覽，避免寫入正式資料。
 
 獨立測試預覽（只在127.0.0.1，記憶體 PostgreSQL，不接正式資料）：
 
@@ -38,7 +42,7 @@
 只發布 dist/，不可把整個 repository 當靜態網站發布。
 
 目前交付狀態及驗證範圍見 [VERIFICATION.md](VERIFICATION.md)。
-程式可部署；未完成雲端專案、Secrets 與正式API網址前，不代表網站已上線。
+GitHub Pages 從 gh-pages 分支發布；main 的原始碼更新不會自動更新網站。修改後須重新建置並把 dist/ 內容提交到 gh-pages。Secrets 尚未儲存時，API 會拒絕登入與資料操作。
 
 ## 檔案
 

@@ -1,12 +1,21 @@
 # Supabase 與網站部署
 
-此版本已完成本機測試，但雲端專案、Secrets 及正式網站網址尚待設定。以下指令已用 Supabase CLI 2.117.0 的 --help 核對。正式部署須登入擁有該專案權限的 Supabase 帳戶。
+現有專案與網站已部署，剩餘 Secrets 儲存與正式資料流程驗收。以下指令已用 Supabase CLI 2.117.0 的 --help 核對。正式部署須登入擁有該專案權限的 Supabase 帳戶。
+
+- PROJECT_REF：rntcattexcpsjtmmdlzy
+- 組織：jerramyu@gmail.com's Org（使用者指定）
+- 區域：東京 ap-northeast-1
+- 網站：https://jerramyu-design.github.io/busan-insurance/
+- API：https://rntcattexcpsjtmmdlzy.supabase.co/functions/v1/insurance-api
+- Secrets：https://supabase.com/dashboard/project/rntcattexcpsjtmmdlzy/functions/secrets
 
 ## 1. 建立專案
 
-在使用者指定的 Supabase 組織建立 busan-insurance，建議區域選東京 ap-northeast-1。先確認組織方案與新增專案費用，再建立。記下 PROJECT_REF。不要把資料庫密碼貼入 GitHub。
+此步已完成，不要重複建立。建立當時確認 Free 方案及新增專案每月 US$0。若未來移到別的組織，須重新確認組織與當時費用。不要把資料庫密碼貼入 GitHub。
 
 ## 2. 建立資料表（二選一）
+
+現有專案已套用 insurance_secure_backend migration，並完成四張表與八個函式權限查核。下列步驟供重新部署時參考。
 
 最簡單：在新專案 SQL Editor 執行 supabase/schema.sql，然後執行 supabase/verify.sql。預期四張表 RLS=true；anon/authenticated 所有權限=false，後端函式 service_execute=true。
 
@@ -17,7 +26,7 @@
     npx --yes supabase@2.117.0 db push --dry-run
     npx --yes supabase@2.117.0 db push
 
-不要對不相關的現有資料庫套用。若舊原型已有加密資料，本版本的 HMAC 索引及 AAD 格式不同：先保留原始加密金鑰並另行遷移既有資料；不能只替換金鑰或把舊 key_version 改成1。此移交時連線帳戶沒有 Supabase 專案，未處理任何真實既有旅客資料。
+不要對不相關的現有資料庫套用。若舊原型已有加密資料，本版本的 HMAC 索引及 AAD 格式不同：先保留原始加密金鑰並另行遷移既有資料；不能只替換金鑰或把舊 key_version 改成1。本次建立全新專案，未處理任何真實既有旅客資料。
 
 ## 3. 設定後端 Secrets
 
@@ -35,6 +44,8 @@ Supabase 自動提供 SUPABASE_URL 與 SUPABASE_SERVICE_ROLE_KEY；不要加入�
 
 本機產生金鑰（不輸出到畫面，也不覆蓋既有檔案）：
 
+本次已產生 .env.local，請使用現有檔案並安全備份，不要重新產生金鑰。管理者可將五行內容完整貼到 Secrets 頁面的 Name 欄，頁面會自動分成五組設定，再按 Save。
+
     npm run secrets:init
 
 它會建立被 Git 忽略的 .env.local。用本機編輯器填入兩個既定密碼及 ALLOWED_ORIGINS。例如 GitHub Pages 網站的 origin 是 https://jerramyu-design.github.io，不含 /busan-insurance/ 路徑。
@@ -46,6 +57,8 @@ Supabase 自動提供 SUPABASE_URL 與 SUPABASE_SERVICE_ROLE_KEY；不要加入�
 請另外安全備份兩組金鑰。GitHub、公開網頁及交付 ZIP 都不能包含 .env.local。不要使用 .env.example 儲存真實值。
 
 ## 4. 部署 Edge Function
+
+現有 insurance-api 已部署版本1。只有修改後端程式時才需重新部署。
 
 在專案根目錄執行：
 
@@ -69,6 +82,8 @@ PowerShell：
 或者修改 config.js 的 apiUrl 為上述公開 Function URL，再執行正式建置。config.js 不需要任何高權限金鑰。正式建置會拒絕未設定 API 的狀態。
 
 將 dist/ 內容放到 HTTPS 靜態主機，並把該網站 origin 加入 ALLOWED_ORIGINS。只發布 dist/；不得直接發布專案根目錄。若主機不支援 _headers，可在主機設定同等的 Cache-Control: no-store、X-Content-Type-Options: nosniff、Referrer-Policy: no-referrer、X-Frame-Options: DENY 標頭。頁面本身已包含 CSP。
+
+目前採用 GitHub Pages，發布來源為 gh-pages 的根目錄，HTTPS 已強制啟用。main 保留原始碼、gh-pages 只放 dist/ 建置成品；修改 main 不會自動發布。GitHub Pages 不套用 _headers，自訂回應標頭須改用支援該功能的主機；個資 API 的 no-store 標頭由 Supabase 後端提供。參考 [GitHub 官方發布來源文件](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)。
 
 ## 6. 正式驗收
 
