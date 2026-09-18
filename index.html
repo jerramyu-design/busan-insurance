@@ -40,6 +40,10 @@
     .admin-btn{background:#1e4033;color:#fff}.admin-btn:hover{background:#153329}.stats-lock{padding:14px;border-radius:12px;background:#f7f7f7;border:1px solid var(--line)}
     .stat-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.stat-card{padding:14px;border:1px solid var(--line);border-radius:12px;background:#fbfcfb}.stat-card b{display:block;font-size:22px;margin-top:4px}.stats-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}.stats-table{min-width:980px}.stats-table th,.stats-table td{padding:10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}.stats-table th{background:#f2f8f5}.stats-table tr:last-child td{border-bottom:0}.danger{background:#fff1ef;color:#a23a24}.mutedbox{font-size:13px;color:var(--muted);margin-top:8px}
     @media(max-width:760px){.stat-cards{grid-template-columns:repeat(2,1fr)}}
+    .next-traveler-dialog{width:min(460px,calc(100vw - 32px));padding:28px;background:#fff;color:var(--text)}
+    .next-traveler-dialog h2{font-size:23px;margin:16px 0 10px}.next-traveler-dialog p{color:var(--muted);line-height:1.8;margin:0 0 20px}.next-traveler-dialog .actions{display:grid;grid-template-columns:1fr;gap:10px}
+    .success-mark{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#e6f1ec;color:var(--green);font-size:26px;font-weight:800}
+    .completion{min-height:100vh;display:grid;place-items:center;padding:24px}.completion-card{width:min(460px,100%);padding:32px;border:1px solid var(--line);border-radius:22px;background:white;box-shadow:var(--shadow)}.completion-card h1{font-size:26px;margin:18px 0 12px}.completion-card p{color:var(--muted);line-height:1.8}
     /* Travel imagery is separate from the original insurance documents. */
     :root{--bg:#f4f7f5;--green:#087f78;--green2:#066a64;--text:#173c40;--muted:#607575;--line:#dbe7e3}
     .login{background:radial-gradient(ellipse at 12% 10%,#dceeea 0,transparent 48%),radial-gradient(ellipse at 95% 95%,#f9eadb 0,transparent 40%),#f8f7f1;padding:48px 28px}
@@ -259,6 +263,26 @@
         <div class="actions"><button id="lockStats" class="btn ghost">鎖定統計表</button><button id="clearStats" class="btn danger">清除全部統計資料</button></div>
         <div class="mutedbox">統計資料集中儲存在線上資料庫，旅客個資會先在伺服器端以 AES-GCM 加密後才寫入資料庫；只有輸入正確統計表密碼時，伺服器才回傳解密後的統計資料。</div>
       </div>
+    </div>
+  </dialog>
+
+  <section id="registrationComplete" class="completion hidden" aria-labelledby="completeTitle">
+    <div class="completion-card">
+      <div class="success-mark" aria-hidden="true">✓</div>
+      <h1 id="completeTitle" tabindex="-1">本次登記已完成</h1>
+      <p>資料已儲存，祝您釜山旅途愉快！</p>
+      <p>若視窗未自動關閉，請手動關閉此分頁。</p>
+      <button id="returnToLogin" class="btn ghost">返回登入頁</button>
+    </div>
+  </section>
+
+  <dialog id="nextTravelerDialog" class="next-traveler-dialog" aria-labelledby="nextTravelerTitle" aria-describedby="nextTravelerStatus">
+    <div class="success-mark" aria-hidden="true">✓</div>
+    <h2 id="nextTravelerTitle">是否輸入下一位旅客？</h2>
+    <p id="nextTravelerStatus"></p>
+    <div class="actions">
+      <button id="nextTravelerYes" class="btn primary" autofocus>是，輸入下一位</button>
+      <button id="nextTravelerNo" class="btn ghost">否，關閉視窗</button>
     </div>
   </dialog>
 

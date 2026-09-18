@@ -22,6 +22,9 @@ import {calcAge} from './domain.mjs';
     const modalTitle = document.getElementById('modalTitle');
     const submitChoice = document.getElementById('submitChoice');
     const submitMsg = document.getElementById('submitMsg');
+    const nextTravelerDialog = document.getElementById('nextTravelerDialog');
+    const nextTravelerStatus = document.getElementById('nextTravelerStatus');
+    const registrationComplete = document.getElementById('registrationComplete');
     const statsBtn = document.getElementById('statsBtn');
     const statsDialog = document.getElementById('statsDialog');
     const statsLocked = document.getElementById('statsLocked');
@@ -49,7 +52,7 @@ import {calcAge} from './domain.mjs';
         const res = await fetch(API_URL, {
           method:'POST',
           headers:{'Content-Type':'application/json',...(sessionToken?{Authorization:'Bearer '+sessionToken}:{})},
-          cache:'no-store',credentials:'omit',
+          cache:'no-store',credentials:'omit',keepalive:payload.action==='logout',
           body:JSON.stringify(payload),
           signal:controller.signal
         });
@@ -66,13 +69,13 @@ import {calcAge} from './domain.mjs';
     }
 
     function setLoggedIn(v){
+      registrationComplete.classList.add('hidden');
       login.classList.toggle('hidden', v);
       app.classList.toggle('hidden', !v);
       if(!v){
         authEpoch++;sessionToken='';clearTimeout(expiryTimer);accessCode.value='';
-        lockStatsView();statsDialog.close();dialog.close();clearDialog.close();
-        nameInput.value='';idInput.value='';dob.value='';idHint.textContent='';
-        choices.forEach(c=>c.checked=false);submitMsg.textContent='';updateEligibility();
+        lockStatsView();statsDialog.close();dialog.close();clearDialog.close();nextTravelerDialog.close();
+        nextTravelerStatus.textContent='';resetTraveler();
       }
     }
     loginBtn.addEventListener('click', async()=>{
@@ -180,7 +183,33 @@ import {calcAge} from './domain.mjs';
       if(!pick) return calcAgeOnTripDate(dob.value)>=15 ? '請選擇一個保險方案。' : '無法取得方案。';
       return '';
     }
+    function resetTraveler(){
+      nameInput.value='';idInput.value='';dob.value='';idHint.textContent='';
+      choices.forEach(c=>c.checked=false);
+      updateEligibility();
+    }
+    document.getElementById('nextTravelerYes').addEventListener('click',()=>{
+      nextTravelerDialog.close();nextTravelerStatus.textContent='';
+      resetTraveler();
+      nameInput.scrollIntoView({behavior:'auto',block:'center'});
+      nameInput.focus({preventScroll:true});
+    });
+    document.getElementById('nextTravelerNo').addEventListener('click',()=>{
+      const pending=apiRequest({action:'logout'}).catch(()=>{});
+      setLoggedIn(false);
+      login.classList.add('hidden');registrationComplete.classList.remove('hidden');
+      window.scrollTo({top:0,behavior:'auto'});
+      document.getElementById('completeTitle').focus({preventScroll:true});
+      // Browser-created tabs may refuse window.close(); retain a clear completion screen.
+      try{window.close();}catch(_e){}
+      void pending;
+    });
+    nextTravelerDialog.addEventListener('cancel',e=>e.preventDefault());
+    document.getElementById('returnToLogin').addEventListener('click',()=>{
+      setLoggedIn(false);loginError.textContent='';accessCode.focus();
+    });
     submitChoice.addEventListener('click',async()=>{
+      if(submitChoice.disabled||nextTravelerDialog.open)return;
       submitMsg.className=''; submitMsg.textContent='';
       const err=validateTraveler();
       if(err){submitMsg.className='msg err';submitMsg.textContent=err;return}
@@ -195,6 +224,8 @@ import {calcAge} from './domain.mjs';
         const result=await apiRequest({action:'submit', record});
         submitMsg.className='msg ok';
         submitMsg.textContent=result.updated ? '已更新這位旅客的方案；線上統計表仍只保留一筆。' : '已送出並加入線上加密統計表。';
+        nextTravelerStatus.textContent=submitMsg.textContent;
+        nextTravelerDialog.showModal();
       }catch(e){ submitMsg.className='msg err'; submitMsg.textContent=e.message || '線上資料寫入失敗。'; }
       finally{ submitChoice.disabled=false; submitChoice.textContent='確認並送出這一位旅客'; }
     });
