@@ -267,4 +267,3 @@ import {calcAge} from './domain.mjs';
     dialog.addEventListener('click',e=>{ if(e.target===dialog) dialog.close(); });
 
     updateEligibility();
-

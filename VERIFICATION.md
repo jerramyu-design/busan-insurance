@@ -12,7 +12,7 @@
 - 錯誤登入、無登入、到期、登出撤銷、獨立統計密碼。
 - 同身分證原子更新及12筆並行請求只產生一筆紀錄。
 - AES-GCM 密文、隨機IV、資料列綁定驗證、HMAC索引。
-- anon/authenticated 无資料表或後端函式存取權、四張表啟用RLS。
+- anon/authenticated 無資料表或後端函式存取權、四張表啟用RLS。
 - 持久限速、一次性及到期清除確認、更新後確認失效。
 - 超過1,000筆（1,105筆）統計快照完整回傳。
 - 靜態 dist/ 不含後端、金鑰或瀏覽器持久個資儲存。
@@ -31,7 +31,7 @@
 
 Supabase 帳戶查詢結果沒有既有專案；建立組織選擇尚待使用者回覆。未建立雲端資料庫、未部署 Edge Function、未設定正式 Secrets、未設定正式 API URL、未發布正式網站。沒有把本機通過宣稱為雲端通過。
 
-GitHub 連接器可讀取 jerramyu-design/busan-insurance，但寫入回覆403。瀏覽器上傳也受工具權限限制；是否完成遠端匯入須以儲存庫中的實際檔案及提交為準。
+GitHub 已透過本機既有 Git 認證成功匯入 jerramyu-design/busan-insurance 的 main 分支，保留原有 Initial commit。原始程式匯入提交為 dcf8810，後續文件修正提交可於儲存庫查看。
 
 ## 測試範圍限制
 
