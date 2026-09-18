@@ -1,0 +1,2 @@
+[functions.insurance-api]
+verify_jwt = false

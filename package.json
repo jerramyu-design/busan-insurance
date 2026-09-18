@@ -1,0 +1,20 @@
+{
+  "name": "busan-insurance",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/preview.mjs",
+    "secrets:init": "node scripts/init-secrets.mjs",
+    "pretest": "node scripts/build.mjs",
+    "test:preview": "node tests/preview-demo.mjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.8"
+  }
+}
