@@ -40,11 +40,58 @@
     .admin-btn{background:#1e4033;color:#fff}.admin-btn:hover{background:#153329}.stats-lock{padding:14px;border-radius:12px;background:#f7f7f7;border:1px solid var(--line)}
     .stat-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.stat-card{padding:14px;border:1px solid var(--line);border-radius:12px;background:#fbfcfb}.stat-card b{display:block;font-size:22px;margin-top:4px}.stats-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}.stats-table{min-width:980px}.stats-table th,.stats-table td{padding:10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}.stats-table th{background:#f2f8f5}.stats-table tr:last-child td{border-bottom:0}.danger{background:#fff1ef;color:#a23a24}.mutedbox{font-size:13px;color:var(--muted);margin-top:8px}
     @media(max-width:760px){.stat-cards{grid-template-columns:repeat(2,1fr)}}
+    /* Travel imagery is separate from the original insurance documents. */
+    :root{--bg:#f4f7f5;--green:#087f78;--green2:#066a64;--text:#173c40;--muted:#607575;--line:#dbe7e3}
+    .login{background:radial-gradient(ellipse at 12% 10%,#dceeea 0,transparent 48%),radial-gradient(ellipse at 95% 95%,#f9eadb 0,transparent 40%),#f8f7f1;padding:48px 28px}
+    .login-shell{width:min(1160px,100%);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(320px,.9fr);gap:60px;align-items:center}
+    .destination-tag{display:flex;align-items:center;gap:12px;font-size:11px;font-weight:800;letter-spacing:2px;color:#326b69}
+    .korea-flag{width:42px;height:28px;object-fit:contain;background:#fff;box-shadow:0 0 0 1px #d4dfdc;border-radius:3px;flex-shrink:0}
+    .login-visual h2{font-size:clamp(30px,3.6vw,46px);font-weight:800;line-height:1.38;letter-spacing:-1.5px;margin:24px 0 12px;color:#163f43}
+    .travel-intro{font-size:15px;line-height:1.9;color:#59716e;margin:0 0 26px}
+    .arrival-photo{margin:0;position:relative;height:342px;border-radius:22px 76px 22px 22px;background:#163f65;isolation:isolate;box-shadow:0 18px 40px #174b5420}
+    .arrival-photo>img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 42%;border-radius:inherit}
+    .arrival-photo:after{content:'';position:absolute;inset:45% 0 0;background:linear-gradient(transparent,#051f40c7);border-radius:0 0 22px 22px;z-index:0}
+    .arrival-caption{position:absolute;left:26px;bottom:24px;color:white;z-index:1}
+    .arrival-caption b{display:block;letter-spacing:5px;font-size:30px;line-height:1.5}.arrival-caption span{font-size:12px;letter-spacing:2px}
+    .travel-stamp{position:absolute;right:20px;top:-30px;width:83px;height:83px;border:1px solid #d78570;outline:1px solid #d78570;outline-offset:-6px;border-radius:50%;display:grid;place-content:center;text-align:center;background:#fff9ee;color:#ae5e48;transform:rotate(12deg);font-size:10px;letter-spacing:2px;z-index:2}.travel-stamp b{display:block;font-size:19px;line-height:1.6;letter-spacing:1px}
+    .photo-link{display:inline-block;font-size:11px;color:#526e6c;margin-top:13px;text-underline-offset:3px}.photo-link:hover{color:#087f78}
+    .login-card{width:100%;padding:36px;border:1px solid #fff;border-radius:24px;box-shadow:0 18px 55px #133f4c0d;background:#ffffffed;position:relative;overflow:hidden}
+    .login-card:before{content:'';display:block;width:42px;height:4px;background:linear-gradient(90deg,#cd2e3a 50%,#0047a0 50%);border-radius:3px;margin-bottom:24px}
+    .login-card .login-kicker{font-size:10px;letter-spacing:2.5px;font-weight:800;color:#7d8b87;margin:0 0 14px}
+    .login-card h1{font-size:27px;letter-spacing:-.6px}.login-card p{line-height:1.7}.login-card .field{margin:25px 0 18px}.login-card .small{font-size:11px;line-height:1.9;border-top:1px solid var(--line);padding-top:16px;margin-top:4px}
+    .login-card .btn.full{padding:15px 16px}.login-card input{background:#fbfcfa}
+    .brand{display:flex;align-items:center;gap:13px}.brand .korea-flag{width:39px;height:26px}.brand-copy{font-size:18px}.brand span{font-size:11px}
+    .busan-welcome{position:relative;isolation:isolate;overflow:hidden;background:#e6f1ec;border:1px solid #d7e6dd;border-radius:22px;padding:32px;margin:0 0 26px}
+    .welcome-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;z-index:1;margin-bottom:23px}
+    .eyebrow{font-size:10px;font-weight:800;letter-spacing:3px;color:#498079;margin:0 0 9px}.welcome-heading h2{font-size:28px;letter-spacing:-.8px;line-height:1.5;margin:0 0 8px}.welcome-heading p:last-child{margin:0;color:#527570;font-size:13px;line-height:1.7}
+    .busan-seal{width:86px;height:86px;display:grid;place-content:center;text-align:center;border-radius:50%;border:1px solid #91bab0;outline:1px solid #91bab0;outline-offset:-6px;color:#27615c;font-size:10px;letter-spacing:2px;flex-shrink:0;transform:rotate(9deg);background:#eef6ef}.busan-seal b{font-size:25px;letter-spacing:0;line-height:1.6}
+    .coastline{position:absolute;top:7px;right:120px;width:400px;height:160px;color:#bdd9ce;z-index:-1;opacity:.7}
+    .destination-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:17px;position:relative;z-index:1}
+    .destination-card{margin:0;min-width:0;background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 5px 17px #17474409}.destination-card>a{display:block;position:relative;overflow:hidden}.destination-card img{display:block;width:100%;height:175px;object-fit:cover;transition:transform .3s ease}.destination-card>a:hover img{transform:scale(1.035)}
+    .destination-card:first-child img{object-position:50% 35%}.destination-card:nth-child(2) img{object-position:58% 50%}.destination-card figcaption{padding:16px 18px 18px}.destination-card .place-kind{display:block;font-size:9px;color:#638782;font-weight:800;letter-spacing:1.8px;margin-bottom:7px}.destination-card h3{font-size:18px;line-height:1.4;margin:0 0 6px}.destination-card p{font-size:12px;color:#6c7e79;line-height:1.7;margin:0}
+    .welcome-bottom{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-top:18px;position:relative;z-index:1}.welcome-bottom p{font-size:11px;color:#56766c;margin:0;line-height:1.7}.welcome-bottom .photo-link{margin:0;white-space:nowrap}
+    .section{border-radius:20px;box-shadow:0 4px 20px #264e4805}.section h2{font-size:21px}.topbar{padding-top:16px;padding-bottom:16px}
+    @media(prefers-reduced-motion:reduce){.destination-card img{transition:none}.destination-card>a:hover img{transform:none}}
+    @media(max-width:920px){.login-shell{gap:30px;grid-template-columns:minmax(0,1.1fr) minmax(300px,1fr)}.arrival-photo{height:300px}.login-card{padding:28px}.login-visual h2{font-size:34px}.destination-grid{gap:12px}.destination-card img{height:145px}.destination-card figcaption{padding:14px}.busan-welcome{padding:24px}}
+    @media(max-width:680px){.login{padding:25px 20px 36px;align-items:start}.login-shell{grid-template-columns:1fr;gap:22px;max-width:440px}.login-visual h2{font-size:29px;margin:17px 0 7px}.travel-intro{font-size:12px;margin:0 0 18px}.arrival-photo{height:188px;border-radius:16px 48px 16px 16px}.arrival-caption{left:20px;bottom:17px}.arrival-caption b{font-size:23px}.arrival-caption span{font-size:10px}.travel-stamp{width:62px;height:62px;right:14px;top:-20px;font-size:8px}.travel-stamp b{font-size:14px}.photo-link{font-size:10px}.login-card{padding:26px}.login-card:before{margin-bottom:18px}.login-card h1{font-size:24px}.login-card .field{margin-top:20px}.login-card .login-kicker{margin-bottom:10px}.brand{gap:10px;align-items:flex-start}.brand-copy{font-size:16px}.brand span{font-size:10px;line-height:1.6}.brand .korea-flag{width:33px;height:22px;margin-top:2px}.busan-welcome{padding:22px 18px;border-radius:18px}.welcome-heading{gap:12px;margin-bottom:18px}.welcome-heading h2{font-size:23px}.welcome-heading p:last-child{font-size:12px}.busan-seal{width:65px;height:65px;font-size:8px;letter-spacing:1px}.busan-seal b{font-size:19px}.coastline{right:-80px;top:10px}.destination-grid{grid-template-columns:1fr;gap:14px}.destination-card img{height:170px}.destination-card figcaption{padding:14px 17px 16px}.destination-card .place-kind{font-size:9px}.destination-card h3{font-size:18px}.welcome-bottom{align-items:flex-start;flex-direction:column;gap:8px}.topbar{padding:13px 16px}}
   </style>
 </head>
 <body>
   <section id="login" class="login">
+    <div class="login-shell">
+    <div class="login-visual">
+      <div class="destination-tag"><img src="assets/travel/korea-flag.svg" class="korea-flag" width="42" height="28" alt="韓國國旗"> BUSAN, SOUTH KOREA</div>
+      <h2>山海之間，<br>遇見釜山。</h2>
+      <p class="travel-intro">海風、彩色山城，還有一段值得期待的旅行。</p>
+      <figure class="arrival-photo">
+        <img src="assets/travel/gwangan-bridge.jpg" alt="夜幕下亮起燈光的釜山廣安大橋" width="1280" height="853" fetchpriority="high">
+        <div class="travel-stamp" aria-hidden="true">KOREA<b>釜山</b>OCT 2026</div>
+        <figcaption class="arrival-caption"><b>BUSAN</b><span>廣安大橋 · 광안대교</span></figcaption>
+      </figure>
+      <a class="photo-link" href="assets/travel/credits.html" target="_blank" rel="noopener noreferrer">景點照片與國旗來源</a>
+    </div>
     <div class="login-card">
+      <p class="login-kicker">READY FOR YOUR JOURNEY</p>
       <h1>韓國釜山自由行</h1>
       <p>旅遊保險選擇程式</p>
       <div class="field">
@@ -55,17 +102,31 @@
       <div id="loginError" class="login-error" role="alert"></div>
       <div class="small">此版本已改為線上資料庫架構；公司密碼由伺服器驗證，不寫在網頁原始碼中。</div>
     </div>
+    </div>
   </section>
 
   <div id="app" class="hidden">
     <header>
       <div class="topbar">
-        <div class="brand">韓國釜山自由行｜旅遊保險<span>依你提供的原始試算圖片與不便險表格呈現</span></div>
+        <div class="brand"><img src="assets/travel/korea-flag.svg" class="korea-flag" width="39" height="26" alt="韓國國旗"><div class="brand-copy">韓國釜山自由行｜旅遊保險<span>依你提供的原始試算圖片與不便險表格呈現</span></div></div>
         <div style="display:flex;gap:8px"><button id="statsBtn" class="btn admin-btn">統計表</button><button id="logoutBtn" class="btn ghost">登出</button></div>
       </div>
     </header>
 
     <main>
+      <section class="busan-welcome" aria-labelledby="busanTitle">
+        <svg class="coastline" viewBox="0 0 400 160" fill="none" aria-hidden="true"><circle cx="302" cy="40" r="22" fill="currentColor"/><g stroke="currentColor" stroke-width="2"><path d="M0 100q50-36 100 0t100 0t100 0t100 0M0 116q50-36 100 0t100 0t100 0t100 0M0 132q50-36 100 0t100 0t100 0t100 0M180 42q9-10 18 0q9-10 18 0M130 62q7-8 14 0q7-8 14 0"/></g></svg>
+        <div class="welcome-heading">
+          <div><p class="eyebrow">HELLO, BUSAN</p><h2 id="busanTitle">把釜山的風景，放進旅程裡。</h2><p>從海灣燈火到山城小巷，一起期待這趟韓國自由行。</p></div>
+          <div class="busan-seal" aria-hidden="true">SOUTH KOREA<b>부산</b>2026.10.18</div>
+        </div>
+        <div class="destination-grid">
+          <figure class="destination-card"><a href="assets/travel/gwangan-bridge.jpg" target="_blank" rel="noopener" aria-label="開啟廣安大橋照片"><img src="assets/travel/gwangan-bridge.jpg" alt="廣安大橋的燈光映照釜山海灣" width="1280" height="853" decoding="async"></a><figcaption><span class="place-kind">01 / OCEAN &amp; LIGHTS</span><h3>廣安大橋</h3><p>海灣上的燈火，映出釜山的夜色。</p></figcaption></figure>
+          <figure class="destination-card"><a href="assets/travel/gamcheon-village.jpg" target="_blank" rel="noopener" aria-label="開啟甘川文化村照片"><img src="assets/travel/gamcheon-village.jpg" alt="沿山坡層層排列的甘川文化村彩色房屋" width="1280" height="547" decoding="async" loading="lazy"></a><figcaption><span class="place-kind">02 / COLORFUL HILLSIDE</span><h3>甘川文化村</h3><p>沿著彩色屋頂，收藏山城的風景。</p></figcaption></figure>
+          <figure class="destination-card"><a href="assets/travel/haedong-yonggungsa.jpg" target="_blank" rel="noopener" aria-label="開啟海東龍宮寺照片"><img src="assets/travel/haedong-yonggungsa.jpg" alt="海東龍宮寺的傳統屋瓦與石橋" width="1280" height="720" decoding="async" loading="lazy"></a><figcaption><span class="place-kind">03 / COASTAL TEMPLE</span><h3>海東龍宮寺</h3><p>在海岸寺院，感受片刻的寧靜。</p></figcaption></figure>
+        </div>
+        <div class="welcome-bottom"><p>欣賞風景，也為旅程做好準備。請接著查看下方保險內容並填寫旅客資料。</p><a class="photo-link" href="assets/travel/credits.html" target="_blank" rel="noopener noreferrer">照片來源與授權 ↗</a></div>
+      </section>
       <section class="section">
         <h2>旅遊不便險內容</h2>
         <p class="lead">下方直接使用你提供的原始圖片，不重新打字、不修改、不重製內容。點圖片可放大查看。</p>
