@@ -4,7 +4,7 @@
 
 網站：https://jerramyu-design.github.io/busan-insurance/
 
-Supabase 專案 busan-insurance（東京，rntcattexcpsjtmmdlzy）已建立，資料表與 Edge Function 已部署。網站已發布；目前仍待管理者儲存 Secrets，才能開放登入與登記。完整狀態見 [VERIFICATION.md](VERIFICATION.md)。
+Supabase 專案 busan-insurance（東京，rntcattexcpsjtmmdlzy）已建立，資料表、Edge Function 與 Secrets 均已完成。網站可登入登記；20項本機測試與15項正式API測試通過，測試登記已清除。完整驗證範圍見 [VERIFICATION.md](VERIFICATION.md)。
 
 ## 已完成
 

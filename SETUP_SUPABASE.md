@@ -1,6 +1,6 @@
 # Supabase 與網站部署
 
-現有專案與網站已部署，剩餘 Secrets 儲存與正式資料流程驗收。以下指令已用 Supabase CLI 2.117.0 的 --help 核對。正式部署須登入擁有該專案權限的 Supabase 帳戶。
+現有專案、網站與 Secrets 已完成，15項正式API測試通過。以下指令供維護與重新部署參考，已用 Supabase CLI 2.117.0 的 --help 核對。正式部署須登入擁有該專案權限的 Supabase 帳戶。
 
 - PROJECT_REF：rntcattexcpsjtmmdlzy
 - 組織：jerramyu@gmail.com's Org（使用者指定）
@@ -29,6 +29,8 @@
 不要對不相關的現有資料庫套用。若舊原型已有加密資料，本版本的 HMAC 索引及 AAD 格式不同：先保留原始加密金鑰並另行遷移既有資料；不能只替換金鑰或把舊 key_version 改成1。本次建立全新專案，未處理任何真實既有旅客資料。
 
 ## 3. 設定後端 Secrets
+
+現有五項設定已由管理者儲存並通過雲端驗證；不要重設加密金鑰。曾誤貼的 MPANY_ACCESS_CODE 不被程式使用，正式設定名稱為 COMPANY_ACCESS_CODE。
 
 在 Supabase Edge Functions → Secrets 設定：
 
@@ -96,7 +98,7 @@ PowerShell：
 - 確認原始圖片與不便險完整內容皆能開啟。
 - 僅在測試資料上測試清除確認；不可拿真實旅客資料做破壞性測試。
 
-本機已驗證同樣規則與資料庫權限，仍需實際 Supabase 專案才能驗證平台環境、Secrets、CORS 及多裝置網路連線。
+本次已在實際 Supabase 專案完成15項API驗證，包含兩個獨立登入共用統計、六筆並行請求、Secrets、CORS、年齡限制、統計密碼及登出撤銷。已檢查資料庫密文並定點清除兩筆合成測試登記。瀏覽器測試範圍見 VERIFICATION.md。
 
 ## 官方依據
 
