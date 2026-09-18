@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'self' https://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'" />
+  <title>韓國釜山自由行｜旅遊保險選擇</title>
+  <style>
+    :root{--bg:#f6f8f6;--card:#fff;--green:#12935f;--green2:#0c7d50;--line:#dfe7e2;--text:#1d2521;--muted:#65736b;--warn:#b54a2b;--shadow:0 8px 28px rgba(0,0,0,.08)}
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--text)}
+    .plan{overflow-x:auto!important}.price-table{min-width:460px}.topbar>div:last-child{flex-shrink:0}button:disabled{opacity:.6;cursor:wait}:focus-visible{outline:3px solid #174fbb;outline-offset:3px}
+    @media(max-width:560px){.topbar{flex-wrap:wrap}.section{padding:14px}main{padding:16px 12px}.modalbar{gap:8px}}
+    button,input{font:inherit}.hidden{display:none!important}
+    .login{min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(135deg,#0e8a59,#0b6c47)}
+    .login-card{width:min(430px,100%);background:#fff;border-radius:22px;padding:28px;box-shadow:var(--shadow)}
+    .login-card h1{margin:0 0 8px;font-size:26px}.login-card p{margin:0 0 20px;color:var(--muted)}
+    .field{display:grid;gap:8px;margin:14px 0}.field label{font-weight:700}.field input{width:100%;padding:13px 14px;border:1px solid #cfd9d3;border-radius:12px;background:#fff}
+    .btn{border:0;border-radius:12px;padding:12px 16px;cursor:pointer;font-weight:800}.btn.primary{background:var(--green);color:#fff}.btn.primary:hover{background:var(--green2)}.btn.ghost{background:#eef5f1;color:#24513c}.btn.full{width:100%}
+    .login-error{color:#c03a2b;font-weight:700;min-height:24px;margin-top:8px}.small{font-size:13px;color:var(--muted)}
+    header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line)}
+    .topbar{max-width:1180px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{font-weight:900;font-size:20px}.brand span{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:2px}
+    main{max-width:1180px;margin:auto;padding:24px 20px 56px}
+    .section{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:20px;box-shadow:0 4px 16px rgba(0,0,0,.03)}
+    .section h2{margin:0 0 8px;font-size:22px}.section .lead{margin:0 0 16px;color:var(--muted)}
+    .source-image{width:100%;border-radius:12px;border:1px solid #d9e1dc;display:block;cursor:zoom-in;background:#fafafa}
+    .notice{padding:12px 14px;border-radius:12px;background:#fff7e8;border:1px solid #f1d79b;color:#6f5110;margin-top:12px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid.two{grid-template-columns:repeat(2,1fr)}
+    @media(max-width:760px){.grid,.grid.two{grid-template-columns:1fr}.topbar{align-items:flex-start}.brand{font-size:18px}}
+    .age-status{margin-top:10px;padding:12px 14px;border-radius:12px;background:#eef8f2;font-weight:800}.age-status.locked{background:#fff0ed;color:#8b351f}
+    .plans{display:grid;gap:16px}.plan{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}.under15-card{border:2px solid #d9a21b;background:#fffaf0}.under15-badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#fff0bd;color:#805a00;font-weight:900;font-size:13px}.eligibility-note{margin-top:10px;font-weight:800}.plan-head{padding:14px 16px;background:#f2f8f5;display:flex;align-items:center;justify-content:space-between;gap:10px}.plan-head h3{margin:0;font-size:20px}.plan-name{font-size:13px;color:var(--muted)}
+    table{width:100%;border-collapse:collapse}.price-table th,.price-table td{padding:12px 10px;border-top:1px solid var(--line);text-align:center}.price-table th{font-size:13px;color:var(--muted);background:#fbfcfb}.price-table td:first-child{text-align:left;font-weight:800}.choose{transform:scale(1.15)}
+    .img-links{padding:12px 14px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px}.mini{padding:8px 10px;border-radius:10px;border:1px solid #bfd8c9;background:#fff;color:#17643f;cursor:pointer;font-weight:700}
+    .summary{background:#f5fbf7;border:1px solid #cbe6d5;border-radius:14px;padding:16px}.summary strong{font-size:20px}.kv{display:grid;grid-template-columns:150px 1fr;gap:8px 12px;margin-top:12px}.kv div:nth-child(odd){color:var(--muted)}
+    @media(max-width:560px){.kv{grid-template-columns:1fr}.kv div:nth-child(odd){margin-top:8px}}
+    dialog{width:min(1080px,96vw);max-height:92vh;border:0;border-radius:16px;padding:0;box-shadow:0 24px 80px rgba(0,0,0,.35)}dialog::backdrop{background:rgba(0,0,0,.7)}.modalbar{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0}.modalbar b{font-size:16px}.modalbody{background:#202522;padding:10px;overflow:auto;max-height:82vh}.modalbody img{display:block;max-width:none;width:auto;min-width:100%;height:auto;margin:auto}.close{border:0;border-radius:9px;padding:8px 11px;background:#ecefec;cursor:pointer;font-weight:800}
+    footer{max-width:1180px;margin:0 auto 30px;padding:0 20px;color:var(--muted);font-size:12px}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.msg{margin-top:12px;padding:11px 13px;border-radius:10px;font-weight:800}.msg.ok{background:#eef8f2;color:#17643f;border:1px solid #c7e5d4}.msg.err{background:#fff0ed;color:#8b351f;border:1px solid #f0c9bd}
+    .admin-btn{background:#1e4033;color:#fff}.admin-btn:hover{background:#153329}.stats-lock{padding:14px;border-radius:12px;background:#f7f7f7;border:1px solid var(--line)}
+    .stat-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.stat-card{padding:14px;border:1px solid var(--line);border-radius:12px;background:#fbfcfb}.stat-card b{display:block;font-size:22px;margin-top:4px}.stats-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}.stats-table{min-width:980px}.stats-table th,.stats-table td{padding:10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}.stats-table th{background:#f2f8f5}.stats-table tr:last-child td{border-bottom:0}.danger{background:#fff1ef;color:#a23a24}.mutedbox{font-size:13px;color:var(--muted);margin-top:8px}
+    @media(max-width:760px){.stat-cards{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+  <section id="login" class="login">
+    <div class="login-card">
+      <h1>韓國釜山自由行</h1>
+      <p>旅遊保險選擇程式</p>
+      <div class="field">
+        <label for="accessCode">公司帳號密碼</label>
+        <input id="accessCode" type="password" autocomplete="current-password" placeholder="請輸入公司帳號" />
+      </div>
+      <button id="loginBtn" class="btn primary full">進入程式</button>
+      <div id="loginError" class="login-error" role="alert"></div>
+      <div class="small">此版本已改為線上資料庫架構；公司密碼由伺服器驗證，不寫在網頁原始碼中。</div>
+    </div>
+  </section>
+
+  <div id="app" class="hidden">
+    <header>
+      <div class="topbar">
+        <div class="brand">韓國釜山自由行｜旅遊保險<span>依你提供的原始試算圖片與不便險表格呈現</span></div>
+        <div style="display:flex;gap:8px"><button id="statsBtn" class="btn admin-btn">統計表</button><button id="logoutBtn" class="btn ghost">登出</button></div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <h2>旅遊不便險內容</h2>
+        <p class="lead">下方直接使用你提供的原始圖片，不重新打字、不修改、不重製內容。點圖片可放大查看。</p>
+        <img src="assets/inconvenience_full.jpg" class="source-image zoomable" data-title="旅遊不便險完整內容（原始圖片）" alt="旅遊不便險完整內容" />
+      </section>
+
+      <section class="section">
+        <h2>旅客資料</h2>
+        <div class="grid">
+          <div class="field"><label for="name">姓名</label><input id="name" maxlength="100" autocomplete="name" placeholder="請輸入姓名" /></div>
+          <div class="field"><label for="idno">身分證字號</label><input id="idno" maxlength="10" autocomplete="off" placeholder="例如 A123456789" /></div>
+          <div class="field"><label for="dob">出生年月日</label><input id="dob" type="date" min="1905-10-19" max="2026-10-18" /></div>
+        </div>
+        <div id="idHint" class="small"></div>
+        <div id="ageStatus" class="age-status locked">請先輸入出生年月日，系統會自動判斷是否滿15歲。</div>
+        <div class="notice">年齡一律以本次旅程日期「2026年10月18日」判斷。若當日未滿15歲，只能選擇你提供的 Y1 保障型；滿15歲後才開放其他方案。所有保額、保費與保障內容均依你提供的原始資料，不自行推算或改動。</div>
+      </section>
+
+      <section id="under15Section" class="section hidden">
+        <h2>未滿15歲方案</h2>
+        <p class="lead">以 2026年10月18日 當日年齡判斷；未滿15歲時，依你提供的資料只能選擇此方案。</p>
+        <div class="plan under15-card">
+          <div class="plan-head">
+            <div><h3>Y1</h3><div class="plan-name">保障型</div></div>
+            <span class="under15-badge">未滿15歲唯一可選</span>
+          </div>
+          <table class="price-table">
+            <thead><tr><th>方案</th><th>意外身故失能</th><th>傷害醫療</th><th>突發疾病</th><th>5天保費</th></tr></thead>
+            <tbody>
+              <tr><td><b>Y1 保障型</b></td><td>69萬</td><td>10萬</td><td>10萬</td><td><b>176元</b></td></tr>
+            </tbody>
+          </table>
+          <div class="img-links">
+            <button class="mini showimg" data-src="assets/y1_under15.jpg" data-title="未滿15歲｜Y1保障型｜原始試算圖片">查看 Y1 原始試算圖片</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="adultSection" class="section hidden">
+        <h2>滿15歲可選方案</h2>
+        <p class="lead">保額與保費完全依你提供的三組試算資料呈現；原始圖片可逐筆開啟核對。</p>
+        <div class="plans">
+          <div class="plan">
+            <div class="plan-head"><div><h3>U3</h3><div class="plan-name">豪華定額型</div></div></div>
+            <table class="price-table">
+              <thead><tr><th>選擇</th><th>意外身故失能</th><th>傷害醫療</th><th>突發疾病</th><th>5天保費</th></tr></thead>
+              <tbody>
+                <tr><td><input class="choose" type="radio" name="plan" data-code="U3" data-name="豪華定額型" data-cover="300 / 30 / 30 萬" data-premium="953" aria-label="U3 300 / 30 / 30 萬"></td><td>300萬</td><td>30萬</td><td>30萬</td><td>953元</td></tr>
+                <tr><td><input class="choose" type="radio" name="plan" data-code="U3" data-name="豪華定額型" data-cover="500 / 50 / 50 萬" data-premium="1153" aria-label="U3 500 / 50 / 50 萬"></td><td>500萬</td><td>50萬</td><td>50萬</td><td>1,153元</td></tr>
+                <tr><td><input class="choose" type="radio" name="plan" data-code="U3" data-name="豪華定額型" data-cover="1000 / 50 / 50 萬" data-premium="1390" aria-label="U3 1000 / 50 / 50 萬"></td><td>1,000萬</td><td>50萬</td><td>50萬</td><td>1,390元</td></tr>
+              </tbody>
+            </table>
+            <div class="img-links">
+              <button class="mini showimg" data-src="assets/u3_300.jpg" data-title="U3｜300 / 30 / 30 萬｜原始試算圖片">查看 U3 300萬原圖</button>
+              <button class="mini showimg" data-src="assets/u3_500.jpg" data-title="U3｜500 / 50 / 50 萬｜原始試算圖片">查看 U3 500萬原圖</button>
+              <button class="mini showimg" data-src="assets/u3_1000.jpg" data-title="U3｜1,000 / 50 / 50 萬｜原始試算圖片">查看 U3 1,000萬原圖</button>
+            </div>
+          </div>
+
+          <div class="plan">
+            <div class="plan-head"><div><h3>Z10</h3><div class="plan-name">夏旅雙享型</div></div></div>
+            <table class="price-table">
+              <thead><tr><th>選擇</th><th>意外身故失能</th><th>傷害醫療</th><th>突發疾病</th><th>5天保費</th></tr></thead>
+              <tbody>
+                <tr><td><input class="choose" type="radio" name="plan" data-code="Z10" data-name="夏旅雙享型" data-cover="300 / 30 / 30 萬" data-premium="1100" aria-label="Z10 300 / 30 / 30 萬"></td><td>300萬</td><td>30萬</td><td>30萬</td><td>1,100元</td></tr>
+                <tr><td><input class="choose" type="radio" name="plan" data-code="Z10" data-name="夏旅雙享型" data-cover="500 / 50 / 50 萬" data-premium="1300" aria-label="Z10 500 / 50 / 50 萬"></td><td>500萬</td><td>50萬</td><td>50萬</td><td>1,300元</td></tr>
+                <tr><td><input class="choose" type="radio" name="plan" data-code="Z10" data-name="夏旅雙享型" data-cover="1000 / 50 / 50 萬" data-premium="1537" aria-label="Z10 1000 / 50 / 50 萬"></td><td>1,000萬</td><td>50萬</td><td>50萬</td><td>1,537元</td></tr>
+              </tbody>
+            </table>
+            <div class="img-links">
+              <button class="mini showimg" data-src="assets/z10_300.jpg" data-title="Z10｜300 / 30 / 30 萬｜原始試算圖片">查看 Z10 300萬原圖</button>
+              <button class="mini showimg" data-src="assets/z10_500.jpg" data-title="Z10｜500 / 50 / 50 萬｜原始試算圖片">查看 Z10 500萬原圖</button>
+              <button class="mini showimg" data-src="assets/z10_1000.jpg" data-title="Z10｜1,000 / 50 / 50 萬｜原始試算圖片">查看 Z10 1,000萬原圖</button>
+            </div>
+          </div>
+
+          <div class="plan">
+            <div class="plan-head"><div><h3>Z9</h3><div class="plan-name">雙重守護型</div></div></div>
+            <table class="price-table">
+              <thead><tr><th>選擇</th><th>意外身故失能</th><th>傷害醫療</th><th>突發疾病</th><th>5天保費</th></tr></thead>
+              <tbody>
+                <tr><td><input class="choose" type="radio" name="plan" data-code="Z9" data-name="雙重守護型" data-cover="300 / 30 / 30 萬" data-premium="1225" aria-label="Z9 300 / 30 / 30 萬"></td><td>300萬</td><td>30萬</td><td>30萬</td><td>1,225元</td></tr>
+                <tr><td><input class="choose" type="radio" name="plan" data-code="Z9" data-name="雙重守護型" data-cover="500 / 50 / 50 萬" data-premium="1425" aria-label="Z9 500 / 50 / 50 萬"></td><td>500萬</td><td>50萬</td><td>50萬</td><td>1,425元</td></tr>
+                <tr><td><input class="choose" type="radio" name="plan" data-code="Z9" data-name="雙重守護型" data-cover="1000 / 50 / 50 萬" data-premium="1662" aria-label="Z9 1000 / 50 / 50 萬"></td><td>1,000萬</td><td>50萬</td><td>50萬</td><td>1,662元</td></tr>
+              </tbody>
+            </table>
+            <div class="img-links">
+              <button class="mini showimg" data-src="assets/z9_300.jpg" data-title="Z9｜300 / 30 / 30 萬｜原始試算圖片">查看 Z9 300萬原圖</button>
+              <button class="mini showimg" data-src="assets/z9_500.jpg" data-title="Z9｜500 / 50 / 50 萬｜原始試算圖片">查看 Z9 500萬原圖</button>
+              <button class="mini showimg" data-src="assets/z9_1000.jpg" data-title="Z9｜1,000 / 50 / 50 萬｜原始試算圖片">查看 Z9 1,000萬原圖</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>選擇摘要</h2>
+        <div id="summary" class="summary">請先輸入出生年月日。</div>
+        <div class="actions">
+          <button id="submitChoice" class="btn primary">確認並送出這一位旅客</button>
+        </div>
+        <div id="submitMsg" role="status" aria-live="polite"></div>
+        <div class="mutedbox">同一個身分證字號只會保留一筆方案。若同一人重新送出，系統會更新原本那一筆，不會產生第二筆方案。</div>
+      </section>
+    </main>
+    <footer>所有保額、保費與原始圖片維持你提供的內容，不自行修改。每位旅客僅保留一個最終方案；資料集中至線上資料庫並採伺服器端加密儲存。</footer>
+  </div>
+
+  <dialog id="statsDialog">
+    <div class="modalbar"><b>加密統計表</b><button id="closeStats" class="close">關閉</button></div>
+    <div style="padding:18px;max-height:82vh;overflow:auto;background:#fff">
+      <div id="statsLocked" class="stats-lock">
+        <div class="field" style="margin-top:0"><label for="statsPassword">統計表密碼</label><input id="statsPassword" type="password" placeholder="請輸入密碼" autocomplete="off" /></div>
+        <button id="unlockStats" class="btn primary">解鎖統計表</button>
+        <div id="statsError" class="login-error"></div>
+      </div>
+      <div id="statsContent" class="hidden">
+        <div class="stat-cards">
+          <div class="stat-card">總人數<b id="statPeople">0</b></div>
+          <div class="stat-card">未滿15歲 Y1<b id="statY1">0</b></div>
+          <div class="stat-card">滿15歲方案人數<b id="statAdult">0</b></div>
+          <div class="stat-card">總保費<b id="statPremium">0元</b></div>
+        </div>
+        <div class="stats-wrap">
+          <table class="stats-table">
+            <thead><tr><th>#</th><th>姓名</th><th>身分證字號</th><th>出生年月日</th><th>10/18年齡</th><th>方案</th><th>保障組合</th><th>5天保費</th><th>最後更新</th></tr></thead>
+            <tbody id="statsBody"></tbody>
+          </table>
+        </div>
+        <div class="actions"><button id="lockStats" class="btn ghost">鎖定統計表</button><button id="clearStats" class="btn danger">清除全部統計資料</button></div>
+        <div class="mutedbox">統計資料集中儲存在線上資料庫，旅客個資會先在伺服器端以 AES-GCM 加密後才寫入資料庫；只有輸入正確統計表密碼時，伺服器才回傳解密後的統計資料。</div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="imgDialog">
+    <div class="modalbar"><b id="modalTitle">原始圖片</b><button id="closeDialog" class="close">關閉</button></div>
+    <div class="modalbody"><img id="modalImg" alt="原始圖片" /></div>
+  </dialog>
+
+  <dialog id="clearDialog" aria-labelledby="clearTitle"><div class="section">
+    <h2 id="clearTitle">清除全部統計資料</h2><p>請再次輸入統計表密碼。下一步會確認清除筆數，此操作無法復原。</p>
+    <div class="field"><label for="clearPassword">統計表密碼</label><input id="clearPassword" type="password" autocomplete="off"></div>
+    <div id="clearError" class="login-error" role="alert"></div>
+    <div class="actions"><button id="confirmClear" class="btn danger">下一步：確認清除</button><button id="cancelClear" class="btn ghost">取消</button></div>
+  </div></dialog>
+  <script src="config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
