@@ -64,7 +64,7 @@
     .login-card .login-kicker{font-size:10px;letter-spacing:2.5px;font-weight:800;color:#7d8b87;margin:0 0 14px}
     .login-card h1{font-size:27px;letter-spacing:-.6px}.login-card p{line-height:1.7}.login-card .field{margin:25px 0 18px}.login-card .small{font-size:11px;line-height:1.9;border-top:1px solid var(--line);padding-top:16px;margin-top:4px}
     .login-card .btn.full{padding:15px 16px}.login-card input{background:#fbfcfa}
-    .brand{display:flex;align-items:center;gap:13px}.brand .korea-flag{width:39px;height:26px}.brand-copy{font-size:18px}.brand span{font-size:11px}
+    .brand{display:flex;align-items:center;gap:13px}.brand .korea-flag{width:39px;height:26px}.brand-copy{font-size:18px;margin:0}.brand span{font-size:11px}
     .busan-welcome{position:relative;isolation:isolate;overflow:hidden;background:#e6f1ec;border:1px solid #d7e6dd;border-radius:22px;padding:32px;margin:0 0 26px}
     .welcome-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;z-index:1;margin-bottom:23px}
     .eyebrow{font-size:10px;font-weight:800;letter-spacing:3px;color:#498079;margin:0 0 9px}.welcome-heading h2{font-size:28px;letter-spacing:-.8px;line-height:1.5;margin:0 0 8px}.welcome-heading p:last-child{margin:0;color:#527570;font-size:13px;line-height:1.7}
@@ -81,39 +81,11 @@
   </style>
 </head>
 <body>
-  <section id="login" class="login">
-    <div class="login-shell">
-    <div class="login-visual">
-      <div class="destination-tag"><img src="assets/travel/korea-flag.svg" class="korea-flag" width="42" height="28" alt="韓國國旗"> BUSAN, SOUTH KOREA</div>
-      <h2>山海之間，<br>遇見釜山。</h2>
-      <p class="travel-intro">海風、彩色山城，還有一段值得期待的旅行。</p>
-      <figure class="arrival-photo">
-        <img src="assets/travel/gwangan-bridge.jpg" alt="夜幕下亮起燈光的釜山廣安大橋" width="1280" height="853" fetchpriority="high">
-        <div class="travel-stamp" aria-hidden="true">KOREA<b>釜山</b>OCT 2026</div>
-        <figcaption class="arrival-caption"><b>BUSAN</b><span>廣安大橋 · 광안대교</span></figcaption>
-      </figure>
-      <a class="photo-link" href="assets/travel/credits.html" target="_blank" rel="noopener noreferrer">景點照片與國旗來源</a>
-    </div>
-    <div class="login-card">
-      <p class="login-kicker">READY FOR YOUR JOURNEY</p>
-      <h1>21世紀七期河南店<br>韓國釜山自由行</h1>
-      <p>旅遊保險選擇程式</p>
-      <div class="field">
-        <label for="accessCode">公司帳號密碼</label>
-        <input id="accessCode" type="password" autocomplete="current-password" placeholder="請輸入公司帳號" />
-      </div>
-      <button id="loginBtn" class="btn primary full">進入程式</button>
-      <div id="loginError" class="login-error" role="alert"></div>
-      <div class="small">此版本已改為線上資料庫架構；公司密碼由伺服器驗證，不寫在網頁原始碼中。</div>
-    </div>
-    </div>
-  </section>
-
-  <div id="app" class="hidden">
+  <div id="app">
     <header>
       <div class="topbar">
-        <div class="brand"><img src="assets/travel/korea-flag.svg" class="korea-flag" width="39" height="26" alt="韓國國旗"><div class="brand-copy">21世紀七期河南店｜韓國釜山自由行｜旅遊保險<span>依你提供的原始試算圖片與不便險表格呈現</span></div></div>
-        <div style="display:flex;gap:8px"><button id="statsBtn" class="btn admin-btn">統計表</button><button id="logoutBtn" class="btn ghost">登出</button></div>
+        <div class="brand"><img src="assets/travel/korea-flag.svg" class="korea-flag" width="39" height="26" alt="韓國國旗"><h1 class="brand-copy">21世紀七期河南店｜韓國釜山自由行｜旅遊保險<span>依你提供的原始試算圖片與不便險表格呈現</span></h1></div>
+        <div style="display:flex;gap:8px"><button id="statsBtn" class="btn admin-btn">統計表</button></div>
       </div>
     </header>
 
@@ -272,7 +244,7 @@
       <h1 id="completeTitle" tabindex="-1">本次登記已完成</h1>
       <p>資料已儲存，祝您釜山旅途愉快！</p>
       <p>若視窗未自動關閉，請手動關閉此分頁。</p>
-      <button id="returnToLogin" class="btn ghost">返回登入頁</button>
+      <button id="returnToForm" class="btn ghost">返回登記頁</button>
     </div>
   </section>
 
@@ -298,6 +270,6 @@
     <div class="actions"><button id="confirmClear" class="btn danger">下一步：確認清除</button><button id="cancelClear" class="btn ghost">取消</button></div>
   </div></dialog>
   <script src="config.js"></script>
-  <script type="module" src="app.js?v=20260918-next-traveler"></script>
+  <script type="module" src="app.js?v=20260919-public-registration"></script>
 </body>
 </html>
