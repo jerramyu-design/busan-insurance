@@ -1,13 +1,8 @@
 import {calcAge} from './domain.mjs';
     const API_URL = (window.BUSAN_INSURANCE_CONFIG && window.BUSAN_INSURANCE_CONFIG.apiUrl || '').trim();
-    let sessionToken='',authEpoch=0,statsViewEpoch=0,expiryTimer,statsTimer;
+    let sessionToken='',sessionExpiresAt=0,sessionPromise=null,authEpoch=0,statsViewEpoch=0,statsTimer;
 
-    const login = document.getElementById('login');
     const app = document.getElementById('app');
-    const accessCode = document.getElementById('accessCode');
-    const loginError = document.getElementById('loginError');
-    const loginBtn = document.getElementById('loginBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
     const dob = document.getElementById('dob');
     const ageStatus = document.getElementById('ageStatus');
     const choices = [...document.querySelectorAll('.choose')];
@@ -45,6 +40,7 @@ import {calcAge} from './domain.mjs';
     }
     async function apiRequest(payload){
       requireApiConfig();
+      if(!['login','health','logout'].includes(payload.action))await ensureSession();
       const requestEpoch=authEpoch;
       const controller = new AbortController();
       const timer = setTimeout(()=>controller.abort(), 15000);
@@ -58,8 +54,8 @@ import {calcAge} from './domain.mjs';
         });
         let data={};
         try{ data=await res.json(); }catch(_e){}
-        if(requestEpoch!==authEpoch)throw new Error('登入狀態已變更。');
-        if(res.status===401 && payload.action!=='login')setLoggedIn(false);
+        if(requestEpoch!==authEpoch)throw new Error('本次填寫已結束。');
+        if(res.status===401 && payload.action!=='login'){sessionToken='';sessionExpiresAt=0;lockStatsView();}
         if(!res.ok || data.ok===false) throw new Error(data.error || `伺服器回應錯誤（${res.status}）`);
         return data;
       }catch(e){
@@ -68,31 +64,22 @@ import {calcAge} from './domain.mjs';
       }finally{ clearTimeout(timer); }
     }
 
-    function setLoggedIn(v){
-      registrationComplete.classList.add('hidden');
-      login.classList.toggle('hidden', v);
-      app.classList.toggle('hidden', !v);
-      if(!v){
-        authEpoch++;sessionToken='';clearTimeout(expiryTimer);accessCode.value='';
-        lockStatsView();statsDialog.close();dialog.close();clearDialog.close();nextTravelerDialog.close();
-        nextTravelerStatus.textContent='';resetTraveler();
-      }
+    async function ensureSession(){
+      if(sessionToken&&sessionExpiresAt>Date.now()+5000)return;
+      if(sessionPromise)return sessionPromise;
+      const epoch=authEpoch;
+      const pending=apiRequest({action:'login'}).then(result=>{
+        if(epoch!==authEpoch)throw new Error('本次填寫已結束。');
+        sessionToken=result.token;sessionExpiresAt=Date.parse(result.expiresAt);
+      }).finally(()=>{if(sessionPromise===pending)sessionPromise=null;});
+      sessionPromise=pending;
+      return pending;
     }
-    loginBtn.addEventListener('click', async()=>{
-      loginError.textContent='';
-      const pwd=accessCode.value.trim();
-      if(!pwd){loginError.textContent='請輸入公司帳號密碼。';return}
-      loginBtn.disabled=true; loginBtn.textContent='驗證中…';
-      try{
-        const result=await apiRequest({action:'login',companyPassword:pwd});
-        sessionToken=result.token;accessCode.value='';clearTimeout(expiryTimer);
-        expiryTimer=setTimeout(()=>setLoggedIn(false),Math.max(0,Date.parse(result.expiresAt)-Date.now()));
-        setLoggedIn(true);
-      }catch(e){ loginError.textContent=e.message || '登入失敗。'; }
-      finally{ loginBtn.disabled=false; loginBtn.textContent='進入程式'; }
-    });
-    accessCode.addEventListener('keydown',e=>{ if(e.key==='Enter') loginBtn.click(); });
-    logoutBtn.addEventListener('click',()=>{const pending=apiRequest({action:'logout'}).catch(()=>{});setLoggedIn(false);void pending;});
+    function resetSession(){
+      authEpoch++;sessionToken='';sessionExpiresAt=0;sessionPromise=null;
+      lockStatsView();statsDialog.close();dialog.close();clearDialog.close();nextTravelerDialog.close();
+      nextTravelerStatus.textContent='';resetTraveler();
+    }
 
     const calcAgeOnTripDate=calcAge;
     function updateEligibility(){
@@ -195,9 +182,9 @@ import {calcAge} from './domain.mjs';
       nameInput.focus({preventScroll:true});
     });
     document.getElementById('nextTravelerNo').addEventListener('click',()=>{
-      const pending=apiRequest({action:'logout'}).catch(()=>{});
-      setLoggedIn(false);
-      login.classList.add('hidden');registrationComplete.classList.remove('hidden');
+      const pending=sessionToken?apiRequest({action:'logout'}).catch(()=>{}):Promise.resolve();
+      resetSession();
+      app.classList.add('hidden');registrationComplete.classList.remove('hidden');
       window.scrollTo({top:0,behavior:'auto'});
       document.getElementById('completeTitle').focus({preventScroll:true});
       // Browser-created tabs may refuse window.close(); retain a clear completion screen.
@@ -205,15 +192,15 @@ import {calcAge} from './domain.mjs';
       void pending;
     });
     nextTravelerDialog.addEventListener('cancel',e=>e.preventDefault());
-    document.getElementById('returnToLogin').addEventListener('click',()=>{
-      setLoggedIn(false);loginError.textContent='';accessCode.focus();
+    document.getElementById('returnToForm').addEventListener('click',()=>{
+      registrationComplete.classList.add('hidden');app.classList.remove('hidden');
+      nameInput.scrollIntoView({behavior:'auto',block:'center'});nameInput.focus({preventScroll:true});
     });
     submitChoice.addEventListener('click',async()=>{
       if(submitChoice.disabled||nextTravelerDialog.open)return;
       submitMsg.className=''; submitMsg.textContent='';
       const err=validateTraveler();
       if(err){submitMsg.className='msg err';submitMsg.textContent=err;return}
-      if(!sessionToken){submitMsg.className='msg err';submitMsg.textContent='登入狀態已失效，請重新登入。';return}
       submitChoice.disabled=true; submitChoice.textContent='送出中…';
       try{
         const pick=currentSelection();
@@ -288,7 +275,7 @@ import {calcAge} from './domain.mjs';
     statsDialog.addEventListener('cancel',lockStatsView);
     statsDialog.addEventListener('close',lockStatsView);
     document.addEventListener('visibilitychange',()=>{if(document.hidden){lockStatsView();clearDialog.close();}});
-    window.addEventListener('pagehide',()=>setLoggedIn(false));
+    window.addEventListener('pagehide',resetSession);
     statsDialog.addEventListener('click',e=>{if(e.target===statsDialog){lockStatsView();statsDialog.close();}});
 
     function openImage(src,title){ modalImg.src=src; modalTitle.textContent=title||'原始圖片'; dialog.showModal(); }

@@ -9,7 +9,7 @@ export async function fixture(){
   await pg.exec(await readFile(new URL('../supabase/schema.sql',import.meta.url),'utf8'));
   const config={
     SUPABASE_URL:'https://example.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'test-only-service-key',
-    COMPANY_ACCESS_CODE:'test-company-only',STATS_PASSWORD:'test-stats-only',
+    STATS_PASSWORD:'test-stats-only',
     DATA_ENCRYPTION_KEY:randomBytes(32).toString('base64'),INDEX_HASH_KEY:randomBytes(32).toString('base64'),
     ALLOWED_ORIGINS:'http://127.0.0.1:4173',
   };

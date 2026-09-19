@@ -13,7 +13,7 @@ test('PostgreSQL schema, encryption and actual HTTP handler integration',async t
     return {status:response.status,data:await response.json(),headers:response.headers};
   };
   const reset=()=>f.pg.exec('delete from public.insurance_records;delete from public.insurance_sessions;delete from public.insurance_rate_buckets;delete from public.insurance_clear_challenges;');
-  const login=async()=>{const r=await call({action:'login',companyPassword:f.config.COMPANY_ACCESS_CODE});assert.equal(r.status,200);return r.data.token;};
+  const login=async()=>{const r=await call({action:'login'});assert.equal(r.status,200);return r.data.token;};
   try{
     await t.test('No anonymous or authenticated table access, RPC execution, or missing RLS',async()=>{
       for(const role of ['anon','authenticated']){
@@ -27,12 +27,12 @@ test('PostgreSQL schema, encryption and actual HTTP handler integration',async t
       const {rows}=await f.pg.query("select relrowsecurity from pg_class where relname in ('insurance_records','insurance_sessions','insurance_rate_buckets','insurance_clear_challenges')");
       assert.equal(rows.length,4);assert.ok(rows.every(r=>r.relrowsecurity));
     });
-    await t.test('Wrong company password and unauthenticated operations fail',async()=>{
+    await t.test('Public sessions need no company password; direct operations still require a session',async()=>{
       await reset();
-      assert.equal((await call({action:'login',companyPassword:'wrong'})).status,401);
+      assert.equal((await call({action:'login'})).status,200);
       for(const action of ['submit','stats','clear'])assert.equal((await call({action,statsPassword:f.config.STATS_PASSWORD,record:traveler()})).status,401);
     });
-    await t.test('Successful login stores only a token digest; logout revokes it',async()=>{
+    await t.test('Public session stores only a token digest; ending registration revokes it',async()=>{
       await reset();const token=await login();
       const {rows}=await f.pg.query('select * from public.insurance_sessions');
       assert.equal(rows[0].token_hash,await sha256(token));assert.ok(!JSON.stringify(rows).includes(token));
@@ -58,7 +58,7 @@ test('PostgreSQL schema, encryption and actual HTTP handler integration',async t
       assert.equal(rows.length,1);
       for(const value of ['測試旅客','A123456789','2011-10-18','雙重守護型'])assert.ok(!JSON.stringify(rows).includes(value));
       assert.notEqual(rows[0].idno_hash,await sha256('A123456789'));
-      assert.equal((await call({action:'stats',statsPassword:f.config.COMPANY_ACCESS_CODE},one)).status,403);
+      assert.equal((await call({action:'stats',statsPassword:'old-company-password'},one)).status,403);
       const stats=await call({action:'stats',statsPassword:f.config.STATS_PASSWORD},two);
       assert.equal(stats.status,200);assert.equal(stats.data.records.length,1);assert.equal(stats.data.records[0].premium,1225);
       assert.equal(stats.headers.get('cache-control'),'no-store');
@@ -86,9 +86,23 @@ test('PostgreSQL schema, encryption and actual HTTP handler integration',async t
       await reset();
       const allowed=await Promise.all(Array.from({length:20},()=>f.db.rate('atomic',5,60)));
       assert.equal(allowed.filter(Boolean).length,5);
-      for(let i=0;i<12;i++)assert.equal((await call({action:'login',companyPassword:'wrong'})).status,401);
+      for(let i=0;i<12;i++)assert.equal((await call({action:'login'})).status,200);
       f.handler=createHandler(f.config,f.db);
-      assert.equal((await call({action:'login',companyPassword:f.config.COMPANY_ACCESS_CODE})).status,429);
+      assert.equal((await call({action:'login'})).status,429);
+    });
+    await t.test('Public sessions cannot read or delete without the independent stats password',async()=>{
+      await reset();const token=await login();
+      for(const action of ['stats','prepareClear','clear']){
+        assert.equal((await call({action},token)).status,403);
+        assert.equal((await call({action,statsPassword:'wrong'},token)).status,403);
+      }
+      assert.equal((await call({action:'stats',statsPassword:f.config.STATS_PASSWORD},token)).status,200);
+    });
+    await t.test('Stats password guessing stays limited across fresh public sessions',async()=>{
+      await reset();const one=await login(),two=await login();
+      for(let i=0;i<12;i++)assert.equal((await call({action:'stats',statsPassword:'wrong'},i%2?one:two)).status,403);
+      const three=await login();
+      assert.equal((await call({action:'stats',statsPassword:f.config.STATS_PASSWORD},three)).status,429);
     });
     await t.test('Clear requires fresh password and one-use confirmation; edits invalidate it',async()=>{
       await reset();const token=await login();await call({action:'submit',record:traveler()},token);

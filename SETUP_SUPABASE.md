@@ -1,6 +1,6 @@
 # Supabase 與網站部署
 
-現有專案、網站與 Secrets 已完成，15項正式API測試通過。以下指令供維護與重新部署參考，已用 Supabase CLI 2.117.0 的 --help 核對。正式部署須登入擁有該專案權限的 Supabase 帳戶。
+現有專案、網站與 Secrets 已完成，目前已取消公司登入密碼，統計表密碼保留；最新8項正式API檢查通過。以下指令供維護與重新部署參考，已用 Supabase CLI 2.117.0 的 --help 核對。正式部署須登入擁有該專案權限的 Supabase 帳戶。
 
 - PROJECT_REF：rntcattexcpsjtmmdlzy
 - 組織：jerramyu@gmail.com's Org（使用者指定）
@@ -36,7 +36,6 @@
 
 | 名稱 | 用途 |
 |---|---|
-| COMPANY_ACCESS_CODE | 本次對話指定的公司登入密碼 |
 | STATS_PASSWORD | 本次對話指定的獨立統計密碼 |
 | DATA_ENCRYPTION_KEY | 隨機32 bytes 的 Base64，AES-256-GCM 加密 |
 | INDEX_HASH_KEY | 另一組獨立隨機32 bytes 的 Base64，HMAC-SHA-256 索引 |
@@ -60,13 +59,13 @@ Supabase 自動提供 SUPABASE_URL 與 SUPABASE_SERVICE_ROLE_KEY；不要加入�
 
 ## 4. 部署 Edge Function
 
-現有 insurance-api 已部署版本1。只有修改後端程式時才需重新部署。
+現有 insurance-api 已部署版本4。只有修改後端程式時才需重新部署。
 
 在專案根目錄執行：
 
     npx --yes supabase@2.117.0 functions deploy insurance-api --project-ref PROJECT_REF --no-verify-jwt --use-api
 
-本程式在 handler.mjs 自行驗證公司密碼、可撤銷登入憑證與獨立統計密碼，因此平台 verify_jwt=false 是刻意設定；它不是匿名讀寫資料庫。部署時須一併包含 domain.mjs、crypto.mjs、db.mjs、handler.mjs 及 deno.json。
+本程式在 handler.mjs 發放公開登記作業憑證，並在每次統計與清除操作自行驗證獨立統計密碼，因此平台 verify_jwt=false 是刻意設定；它不是匿名讀寫資料庫。部署時須一併包含 domain.mjs、crypto.mjs、db.mjs、handler.mjs 及 deno.json。
 
 API網址：
 
@@ -90,7 +89,7 @@ PowerShell：
 ## 6. 正式驗收
 
 - 在雲端執行 supabase/verify.sql 並檢查 Supabase Security Advisor。
-- 使用正確與錯誤公司密碼測試。
+- 開啟網站不應要求公司登入密碼，直接使用合成測試資料登記。
 - 以兩個裝置測試不同旅客集中於同一統計表。
 - 同一身分證再次送出，只留下更新後的一筆。
 - 測試 2011-10-19（Y1）及 2011-10-18（成人方案）生日邊界。
@@ -98,7 +97,7 @@ PowerShell：
 - 確認原始圖片與不便險完整內容皆能開啟。
 - 僅在測試資料上測試清除確認；不可拿真實旅客資料做破壞性測試。
 
-本次已在實際 Supabase 專案完成15項API驗證，包含兩個獨立登入共用統計、六筆並行請求、Secrets、CORS、年齡限制、統計密碼及登出撤銷。已檢查資料庫密文並定點清除兩筆合成測試登記。瀏覽器測試範圍見 VERIFICATION.md。
+本次已在實際 Supabase 專案完成15項API驗證，包含兩個獨立作業共用統計、六筆並行請求、Secrets、CORS、年齡限制、統計密碼及登出撤銷。已檢查資料庫密文並定點清除兩筆合成測試登記。瀏覽器測試範圍見 VERIFICATION.md。
 
 ## 官方依據
 
